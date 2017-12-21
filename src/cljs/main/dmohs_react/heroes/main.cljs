@@ -6,6 +6,7 @@
    [dmohs-react.heroes.components.hero-list :as list]
    [dmohs-react.heroes.elements :as elements]
    [dmohs-react.heroes.nav :as nav]
+   [dmohs-react.heroes.services.hero-service :as hero-service]
    [dmohs-react.heroes.utils :as utils]
    ))
 
@@ -27,10 +28,11 @@
    :component-will-mount
    (fn [{:keys [this state]}]
      (init-nav-paths)
-     (this :handle-hash-change))
+     (this :handle-hash-change)
+     (hero-service/get-heroes #(swap! state assoc :loaded? true)))
    :render
    (fn [{:keys [props state]}]
-     (let [{:keys [window-hash]} @state
+     (let [{:keys [window-hash loaded?]} @state
            {:keys [component make-props]} (nav/find-path-handler (str window-hash))]
        [:div {}
         [:h1 {:style {:fontSize "1.2em" :color "#999" :marginBottom 0}}
@@ -39,8 +41,9 @@
          (elements/make-nav-link {:href (nav/get-link :dashboard)} "Dashboard")
          (elements/make-nav-link {:href (nav/get-link :list)} "Heroes")]
         [:div {:style {:marginTop "1rem"}}
-         (when component
-           [component (make-props)])]]))
+         (cond
+           (not loaded?) [:h2 {} "Loading heroes..."]
+           component [component (make-props)])]]))
    :component-did-mount
    (fn [{:keys [locals this]}]
      (swap! locals assoc :hash-change-listener (partial this :handle-hash-change))

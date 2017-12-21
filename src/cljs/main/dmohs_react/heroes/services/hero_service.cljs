@@ -4,8 +4,6 @@
    [dmohs-react.heroes.utils :as utils]
    ))
 
-(def ^:private live? false)
-
 (defonce ^:private mock-heroes
          [{:id 11 :name "Mr. Nice"}
           {:id 12 :name "Narco"}
@@ -18,14 +16,17 @@
           {:id 19 :name "Magma"}
           {:id 20 :name "Tornado"}])
 
-(defonce local-heroes (atom (if live? [] mock-heroes)))
+(defonce local-heroes (atom (if @utils/use-live-data? false mock-heroes)))
 
-(defn get-heroes [on-done]
-  (if live?
-    (utils/ajax {:url nil
-                 :on-done (fn [{:keys [get-parsed-response]}]
-                            (on-done (reset! local-heroes (get-parsed-response))))})
-    (on-done @local-heroes)))
+(defn get-heroes
+  ([]
+   (get-heroes (constantly nil)))
+  ([on-done]
+   (if @utils/use-live-data?
+     (utils/ajax {:url nil
+                  :on-done (fn [{:keys [get-parsed-response]}]
+                             (on-done (reset! local-heroes (get-parsed-response))))})
+     (on-done @local-heroes))))
 
 (defn search-heroes [query on-done]
   (let [query (string/trim query)]
@@ -39,3 +40,14 @@
              (re-pattern (string/lower-case query))
              (string/lower-case (:name %)))
            result)))))))
+
+(defn add-hero [hero-name]
+  (when-not (string/blank? hero-name)
+    (if @utils/use-live-data?
+      (utils/ajax {:url nil
+                   :method :post
+                   :data hero-name
+                   :on-done (fn [{:keys [get-parsed-response]}]
+                              (swap! local-heroes conj (get-parsed-response)))})
+      (swap! local-heroes conj
+             {:id (inc (:id (apply max-key :id @local-heroes))) :name hero-name}))))

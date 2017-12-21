@@ -5,6 +5,7 @@
    [dmohs-react.heroes.elements :as elements]
    [dmohs-react.heroes.nav :as nav]
    [dmohs-react.heroes.services.hero-service :as hero-service]
+   [dmohs-react.heroes.style :as style]
    [dmohs-react.heroes.utils :as utils]
    ))
 
@@ -17,7 +18,10 @@
    :render
    (fn [{:keys [state]}]
      [:div {}
-      [:h3 {:style {:textAlign "center" :marginBottom 0 :fontWeight "lighter" :color "#444"}} "Top Heroes"]
+      [:h3 {:style (merge
+                    {:textAlign "center" :marginBottom 0}
+                    (:h2-and-h3 style/elements))}
+       "Top Heroes"]
       [:div {:style {:display "flex" :paddingTop 10}}
        (map (fn [{:keys [id name]}]
               [:a {:href (nav/get-link :details id)

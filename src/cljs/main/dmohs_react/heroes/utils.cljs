@@ -23,16 +23,11 @@
   (js->clj (js/JSON.parse x)))
 
 
-(def use-live-data? (atom true))
+(def use-live-data? (atom false))
 
 
-(defn ajax [arg-map]
-  (let [url (:url arg-map)
-        on-done (:on-done arg-map)
-        method (if-let [method (:method arg-map)] (clojure.string/upper-case (name method)) "GET")
-        headers (:headers arg-map)
-        data (:data arg-map)
-        with-credentials? (:with-credentials? arg-map)
+(defn ajax [{:keys [url on-done method headers data with-credentials? canned-response] :as arg-map}]
+  (let [method (if-let [method (:method arg-map)] (clojure.string/upper-case (name method)) "GET")
         canned-response-params (when-not @use-live-data? (:canned-response arg-map))]
     (assert url (str "Missing url parameter: " arg-map))
     (assert on-done (str "Missing on-done callback: " arg-map))

@@ -3,8 +3,24 @@
    [dmohs.react :as react]
    [dmohs-react.heroes.nav :as nav]
    [dmohs-react.heroes.services.hero-service :as hero-service]
+   [dmohs-react.heroes.style :as style]
    [dmohs-react.heroes.utils :as utils]
    ))
+
+(react/defc- HeroCreator
+  {:render
+   (fn [{:keys [state]}]
+     (let [{:keys [value]} @state]
+       [:div {}
+        [:label {} "Hero name:"
+         [:input {:style {:margin "0 0.5em"}
+                  :value (or value "")
+                  :onChange #(swap! state assoc :value (.. % -target -value))}]]
+        [:button {:style (:button style/elements)
+                  :onClick (fn []
+                             (hero-service/add-hero value)
+                             (swap! state assoc :value ""))}
+         "add"]]))})
 
 (react/defc HeroList
   {:component-will-mount
@@ -15,8 +31,8 @@
    :render
    (fn [{:keys [state]}]
      [:div {}
-      [:h3 {} "My Heroes"]
-      [:div {}]
+      [:h2 {:style (:h2-and-h3 style/elements)} "My Heroes"]
+      [HeroCreator]
       [:ul {}
        (map (fn [{:keys [id name]}]
               [:li {}
