@@ -16,7 +16,7 @@
                  props)
           :onMouseOver #(swap! state assoc :hovering? true)
           :onMouseOut #(swap! state dissoc :hovering?))
-        children]))})
+        (seq children)]))})
 
 (defn make-nav-link [props label]
   [Hover {:element-key :a

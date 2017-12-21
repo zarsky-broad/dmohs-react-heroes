@@ -48,6 +48,14 @@
                    :method :post
                    :data hero-name
                    :on-done (fn [{:keys [get-parsed-response]}]
-                              (swap! local-heroes conj (get-parsed-response)))})
+                              (get-heroes))})
       (swap! local-heroes conj
              {:id (inc (:id (apply max-key :id @local-heroes))) :name hero-name}))))
+
+(defn delete-hero [hero-id]
+  (if @utils/use-live-data?
+    (utils/ajax {:url (str nil "/" hero-id)
+                 :method :delete
+                 :on-done (fn [{:keys [get-parsed-response]}]
+                            (get-heroes))})
+    (swap! local-heroes (partial filter #(not= hero-id (:id %))))))
