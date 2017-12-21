@@ -8,7 +8,7 @@
 (react/defc Hover
   {:render
    (fn [{:keys [props state]}]
-     (let [{:keys [element-key props hover-props children]} props
+     (let [{:keys [element-key props hover-props child]} props
            {:keys [hovering?]} @state]
        [element-key
         (assoc (if hovering?
@@ -16,7 +16,7 @@
                  props)
           :onMouseOver #(swap! state assoc :hovering? true)
           :onMouseOut #(swap! state dissoc :hovering?))
-        (seq children)]))})
+        child]))})
 
 (defn make-nav-link [props label]
   [Hover {:element-key :a
@@ -24,4 +24,4 @@
                   {:style (:nav>a style/elements)}
                   props)
           :hover-props {:style {:color "#039be5" :backgroundColor "#cfd8dc"}}
-          :children label}])
+          :child label}])

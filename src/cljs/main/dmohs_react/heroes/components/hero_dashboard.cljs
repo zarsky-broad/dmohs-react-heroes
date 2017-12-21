@@ -32,7 +32,7 @@
                  :props {:style {:borderRadius 2 :padding 20
                                  :color "#eee" :backgroundColor "#607D8B"}}
                  :hover-props {:style {:color "#607d8b" :backgroundColor "#eee"}}
-                 :children [:h4 {:style {:textAlign "center"}} name]}]])
+                 :child [:h4 {:style {:textAlign "center"}} name]}]])
             (subvec @hero-service/local-heroes 1 5))]
       [HeroSearch]])
    :component-will-unmount

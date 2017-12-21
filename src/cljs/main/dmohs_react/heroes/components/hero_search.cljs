@@ -25,8 +25,9 @@
                  {:element-key :a
                   :props {:href (nav/get-link :details id)
                           :style {:textDecoration "none" :display "block"
+                                  :color "#888"
                                   :border "1px solid #808080" :borderTop "none" :padding 5
                                   :width 195 :height 16}}
                   :hover-props {:style {:backgroundColor "#607D8B" :color "#fff"}}
-                  :children name}])
+                  :child name}])
               (:filtered-heroes @state))]]))})

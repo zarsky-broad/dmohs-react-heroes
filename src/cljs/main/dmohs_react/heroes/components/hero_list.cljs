@@ -44,8 +44,9 @@
                                       :href (nav/get-link :details id)}
                               :hover-props {:style {:backgroundColor "#ddd" :color "#607D8B"
                                                     :position "relative" :left "0.1em"}}
-                              :children
-                              [[:span {:style {:display "inline-block"
+                              :child
+                              [:div {}
+                               [:span {:style {:display "inline-block"
                                                :backgroundColor "#607D8B" :color "#fff"
                                                :font-size "small" :textAlign "right" :lineHeight "1em"
                                                :margin "-0.3em 0.8em 0 -1px" :padding "0.8em 0.7em 0 0.7em"
