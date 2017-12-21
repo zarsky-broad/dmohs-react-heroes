@@ -47,8 +47,7 @@
       (utils/ajax {:url nil
                    :method :post
                    :data hero-name
-                   :on-done (fn [{:keys [get-parsed-response]}]
-                              (get-heroes))})
+                   :on-done #(get-heroes)})
       (swap! local-heroes conj
              {:id (inc (:id (apply max-key :id @local-heroes))) :name hero-name}))))
 
@@ -56,6 +55,12 @@
   (if @utils/use-live-data?
     (utils/ajax {:url (str nil "/" hero-id)
                  :method :delete
+                 :on-done #(get-heroes)})
+    (swap! local-heroes (partial remove #(= hero-id (:id %))))))
+
+(defn get-hero [hero-id on-done]
+  (if @utils/use-live-data?
+    (utils/ajax {:url (str nil "/" hero-id)
                  :on-done (fn [{:keys [get-parsed-response]}]
-                            (get-heroes))})
-    (swap! local-heroes (partial filter #(not= hero-id (:id %))))))
+                            (on-done (get-parsed-response)))})
+    (on-done (some #(when (= hero-id (:id %)) %) @local-heroes))))
