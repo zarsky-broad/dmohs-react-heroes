@@ -40,7 +40,7 @@
                                    :props (utils/deep-merge
                                            {:style (:nav>a style/elements)}
                                            props)
-                                   :hover-props {:style {:color "#039be5" :backgroundColor style/light-bluish}}
+                                   :hover-props {:style {:color "#039be5" :backgroundColor (:light-bluish style/colors)}}
                                    :child label}])]
        [:div {}
         [:h1 {:style {:fontSize "1.2em" :color "#999" :marginBottom 0}}

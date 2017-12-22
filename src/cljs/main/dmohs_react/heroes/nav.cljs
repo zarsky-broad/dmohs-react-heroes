@@ -51,12 +51,6 @@
 (defn get-link [k & args]
   (str "#" (apply get-path k args)))
 
-(defn go-to-path [k & args]
-  (aset js/window "location" "hash" (apply get-path k args)))
-
-(defn is-current-path? [k & args]
-  (= (apply get-path k args) (subs (aget js/window "location" "hash") 1)))
-
 (defn execute-redirects [window-hash]
   (let [cleaned (js/decodeURI (subs window-hash 1))
         matching-handlers (filter
@@ -75,6 +69,3 @@
       (let [{:keys [make-path]} handler]
         (js-invoke (aget js/window "location") "replace" (str "#" (make-path)))
         true))))
-
-(defn replace-history-state [k & args]
-  (js/window.history.replaceState nil "" (apply get-link k args)))

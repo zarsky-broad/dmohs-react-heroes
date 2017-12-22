@@ -23,14 +23,14 @@
                                    {:style (assoc (:button style/elements)
                                              :marginTop 20 :padding "5px 10px")}
                                    button-props)
-                           :hover-props {:style {:backgroundColor style/light-bluish}}
+                           :hover-props {:style {:backgroundColor (:light-bluish style/colors)}}
                            :child label}])]
        [:div {}
         [:h2 {:style (:h2-and-h3 style/elements)}
          (string/upper-case name) " Details"]
         "id: " id
         [:label {:style {:display "block"
-                         :color style/dark-bluish :fontWeight "bold"
+                         :color (:dark-bluish style/colors) :fontWeight "bold"
                          :margin "0.5em 0" :width "3em"}}
          "name:"
          [:input {:style {:height "2em" :fontSize "1em" :paddingLeft "0.4em"}

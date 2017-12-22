@@ -42,12 +42,12 @@
                                               :height "1.6em" :width "15em"
                                               :textDecoration "none"}
                                       :href (nav/get-link :details id)}
-                              :hover-props {:style {:backgroundColor "#ddd" :color style/dark-bluish
+                              :hover-props {:style {:backgroundColor "#ddd" :color (:dark-bluish style/colors)
                                                     :position "relative" :left "0.1em"}}
                               :child
                               [:div {}
                                [:span {:style {:display "inline-block"
-                                               :backgroundColor style/dark-bluish :color "#fff"
+                                               :backgroundColor (:dark-bluish style/colors) :color "#fff"
                                                :font-size "small" :textAlign "right" :lineHeight "1em"
                                                :margin "-0.3em 0.8em 0 -1px" :padding "0.8em 0.7em 0 0.7em"
                                                :borderRadius "4px 0 0 4px"

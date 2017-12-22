@@ -1,4 +1,4 @@
-(defproject org.broadinstitute/dmohs-react-heroes "0.0.1"
+(defproject org.broadinstitute/dmohs-react-heroes "1.0.0"
   :dependencies
   [
    [dmohs/react "1.3.0"]
@@ -42,6 +42,4 @@
                                            :output-to "resources/public/target/compiled.js"}}}}
   :resource {:resource-paths ["src/static"]
              :target-path "resources/public"
-             :excludes [#".*\.DS_Store"]
-             :skip-stencil [#"src/static/assets/.*"]
-             :extra-values {:vtag ~(.getTime (java.util.Date.))}})
+             :excludes [#".*\.DS_Store"]})

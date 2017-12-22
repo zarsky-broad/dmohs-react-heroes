@@ -28,7 +28,7 @@
                                   :color "#888"
                                   :border "1px solid #808080" :borderTop "none" :padding 5
                                   :width 195 :height 16}}
-                  :hover-props {:style {:backgroundColor style/dark-bluish :color "#fff"}}
+                  :hover-props {:style {:backgroundColor (:dark-bluish style/colors) :color "#fff"}}
                   :child name}])
               (:filtered-heroes @state))]]))})
 
@@ -53,8 +53,8 @@
                [Hover
                 {:element-key :div
                  :props {:style {:borderRadius 2 :padding 20
-                                 :color "#eee" :backgroundColor style/dark-bluish}}
-                 :hover-props {:style {:color style/dark-bluish :backgroundColor "#eee"}}
+                                 :color "#eee" :backgroundColor (:dark-bluish style/colors)}}
+                 :hover-props {:style {:color (:dark-bluish style/colors) :backgroundColor "#eee"}}
                  :child [:h4 {:style {:textAlign "center"}} name]}]])
             (subvec @hero-service/local-heroes 1 5))]
       [HeroSearch]])
