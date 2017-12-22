@@ -12,3 +12,7 @@
            :display "inline-block"
            :backgroundColor "#eee"
            :borderRadius 4}})
+
+(def dark-bluish "#607d8b")
+
+(def light-bluish "#cfd8dc")

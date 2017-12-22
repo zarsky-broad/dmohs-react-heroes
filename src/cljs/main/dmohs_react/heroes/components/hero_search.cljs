@@ -5,6 +5,7 @@
    [dmohs-react.heroes.elements :as elements]
    [dmohs-react.heroes.nav :as nav]
    [dmohs-react.heroes.services.hero-service :as hero-service]
+   [dmohs-react.heroes.style :as style]
    [dmohs-react.heroes.utils :as utils]
    ))
 
@@ -28,6 +29,6 @@
                                   :color "#888"
                                   :border "1px solid #808080" :borderTop "none" :padding 5
                                   :width 195 :height 16}}
-                  :hover-props {:style {:backgroundColor "#607D8B" :color "#fff"}}
+                  :hover-props {:style {:backgroundColor style/dark-bluish :color "#fff"}}
                   :child name}])
               (:filtered-heroes @state))]]))})

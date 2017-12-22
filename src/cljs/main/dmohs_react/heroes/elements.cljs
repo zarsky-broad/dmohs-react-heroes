@@ -23,5 +23,5 @@
           :props (utils/deep-merge
                   {:style (:nav>a style/elements)}
                   props)
-          :hover-props {:style {:color "#039be5" :backgroundColor "#cfd8dc"}}
+          :hover-props {:style {:color "#039be5" :backgroundColor style/light-bluish}}
           :child label}])

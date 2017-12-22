@@ -56,7 +56,12 @@
     (utils/ajax {:url (str nil "/" hero-id)
                  :method :delete
                  :on-done #(get-heroes)})
-    (swap! local-heroes (partial remove #(= hero-id (:id %))))))
+    (swap! local-heroes
+           (fn [hero]
+             (->>
+              hero
+              (remove #(= hero-id (:id %)))
+              (vec))))))
 
 (defn get-hero [hero-id on-done]
   (if @utils/use-live-data?
@@ -64,3 +69,14 @@
                  :on-done (fn [{:keys [get-parsed-response]}]
                             (on-done (get-parsed-response)))})
     (on-done (some #(when (= hero-id (:id %)) %) @local-heroes))))
+
+(defn update-hero [hero-id hero-name]
+  (when-not (string/blank? hero-name)
+    (if @utils/use-live-data?
+      (utils/ajax {:url (str nil "/" hero-id)
+                   :method :put
+                   :data hero-name
+                   :on-done #(get-heroes)})
+      (swap! local-heroes (partial mapv #(if (= hero-id (:id %))
+                                            (assoc % :name hero-name)
+                                            %))))))
