@@ -1,0 +1,28 @@
+{
+  "name": "dmohs-react-heroes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "create-react-class": "^15.6.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "webpack": "^3.10.0",
+    "uglifyjs-webpack-plugin": "^1.1.4"
+  },
+  "scripts": {
+    "webpack": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zarsky-broad/dmohs-react-heroes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zarsky-broad/dmohs-react-heroes/issues"
+  },
+  "homepage": "https://github.com/zarsky-broad/dmohs-react-heroes#readme"
+}

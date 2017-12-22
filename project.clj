@@ -1,7 +1,7 @@
 (defproject org.broadinstitute/dmohs-react-heroes "0.0.1"
   :dependencies
   [
-   [dmohs/react "1.2.4+15.5.4-1"]
+   [dmohs/react "1.3.0"]
    [org.clojure/clojure "1.8.0"]
    [org.clojure/clojurescript "1.9.946"]
    ]
