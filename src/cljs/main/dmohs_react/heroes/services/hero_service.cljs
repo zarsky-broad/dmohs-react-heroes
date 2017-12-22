@@ -57,11 +57,7 @@
                  :method :delete
                  :on-done #(get-heroes)})
     (swap! local-heroes
-           (fn [hero]
-             (->>
-              hero
-              (remove #(= hero-id (:id %)))
-              (vec))))))
+           (comp vec (partial remove #(= hero-id (:id %)))))))
 
 (defn get-hero [hero-id on-done]
   (if @utils/use-live-data?
