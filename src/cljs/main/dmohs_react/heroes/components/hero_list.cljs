@@ -1,7 +1,7 @@
 (ns dmohs-react.heroes.components.hero-list
   (:require
    [dmohs.react :as react]
-   [dmohs-react.heroes.elements :as elements]
+   [dmohs-react.heroes.components.hover :refer [Hover]]
    [dmohs-react.heroes.nav :as nav]
    [dmohs-react.heroes.services.hero-service :as hero-service]
    [dmohs-react.heroes.style :as style]
@@ -35,7 +35,7 @@
       [:h2 {:style (:h2-and-h3 style/elements)} "My Heroes"]
       [HeroCreator]
       (map (fn [{:keys [id name]}]
-             [elements/Hover {:element-key :a
+             [Hover {:element-key :a
                               :props {:style {:display "block"
                                               :backgroundColor "#eee" :color "#888"
                                               :margin "0.5em" :padding "0.3em 0" :borderRadius 4

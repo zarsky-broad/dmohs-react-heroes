@@ -1,7 +1,6 @@
-(ns dmohs-react.heroes.elements
+(ns dmohs-react.heroes.components.hover
   (:require
    [dmohs.react :as react]
-   [dmohs-react.heroes.style :as style]
    [dmohs-react.heroes.utils :as utils]
    ))
 
@@ -17,11 +16,3 @@
           :onMouseOver #(swap! state assoc :hovering? true)
           :onMouseOut #(swap! state dissoc :hovering?))
         child]))})
-
-(defn make-nav-link [props label]
-  [Hover {:element-key :a
-          :props (utils/deep-merge
-                  {:style (:nav>a style/elements)}
-                  props)
-          :hover-props {:style {:color "#039be5" :backgroundColor style/light-bluish}}
-          :child label}])

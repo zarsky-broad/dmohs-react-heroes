@@ -4,10 +4,11 @@
    [dmohs-react.heroes.components.hero-dashboard :as dashboard]
    [dmohs-react.heroes.components.hero-details :as details]
    [dmohs-react.heroes.components.hero-list :as list]
-   [dmohs-react.heroes.elements :as elements]
+   [dmohs-react.heroes.components.hover :refer [Hover]]
    [dmohs-react.heroes.nav :as nav]
    [dmohs-react.heroes.services.hero-service :as hero-service]
    [dmohs-react.heroes.utils :as utils]
+   [dmohs-react.heroes.style :as style]
    ))
 
 (defn- init-nav-paths []
@@ -33,13 +34,20 @@
    :render
    (fn [{:keys [props state]}]
      (let [{:keys [window-hash loaded?]} @state
-           {:keys [component make-props]} (nav/find-path-handler (str window-hash))]
+           {:keys [component make-props]} (nav/find-path-handler (str window-hash))
+           make-nav-link (fn [props label]
+                           [Hover {:element-key :a
+                                   :props (utils/deep-merge
+                                           {:style (:nav>a style/elements)}
+                                           props)
+                                   :hover-props {:style {:color "#039be5" :backgroundColor style/light-bluish}}
+                                   :child label}])]
        [:div {}
         [:h1 {:style {:fontSize "1.2em" :color "#999" :marginBottom 0}}
          (:title props)]
-        [:nav {}
-         (elements/make-nav-link {:href (nav/get-link :dashboard)} "Dashboard")
-         (elements/make-nav-link {:href (nav/get-link :list)} "Heroes")]
+        [:nav {:style {:paddingTop 10}}
+         (make-nav-link {:href (nav/get-link :dashboard)} "Dashboard")
+         (make-nav-link {:href (nav/get-link :list)} "Heroes")]
         [:div {:style {:marginTop "1rem"}}
          (cond
            (not loaded?) [:h2 {} "Loading heroes..."]

@@ -2,7 +2,7 @@
   (:require
    [clojure.string :as string]
    [dmohs.react :as react]
-   [dmohs-react.heroes.elements :as elements]
+   [dmohs-react.heroes.components.hover :refer [Hover]]
    [dmohs-react.heroes.nav :as nav]
    [dmohs-react.heroes.services.hero-service :as hero-service]
    [dmohs-react.heroes.style :as style]
@@ -17,7 +17,7 @@
    (fn [{:keys [state]}]
      (let [{:keys [id name] :as hero} (:hero @state)
            make-button (fn [button-props label]
-                         [elements/Hover
+                         [Hover
                           {:element-key :button
                            :props (utils/deep-merge
                                    {:style (assoc (:button style/elements)
