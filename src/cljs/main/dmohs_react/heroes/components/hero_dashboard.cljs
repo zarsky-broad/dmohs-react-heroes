@@ -1,7 +1,6 @@
 (ns dmohs-react.heroes.components.hero-dashboard
   (:require
    [dmohs.react :as react]
-   [dmohs-react.heroes.components.hover :refer [Hover]]
    [dmohs-react.heroes.nav :as nav]
    [dmohs-react.heroes.services.hero-service :as hero-service]
    [dmohs-react.heroes.style :as style]
@@ -21,15 +20,14 @@
                               #(swap! state assoc :filtered-heroes %)))}]
         [:div {:style {:marginBottom "1em"}}
          (map (fn [{:keys [id name]}]
-                [Hover
-                 {:element-key :a
-                  :props {:href (nav/get-link :details id)
-                          :style {:textDecoration "none" :display "block"
-                                  :color "#888"
-                                  :border "1px solid #808080" :borderTop "none" :padding 5
-                                  :width 195 :height 16}}
-                  :hover-props {:style {:backgroundColor (:dark-bluish style/colors) :color "#fff"}}
-                  :child name}])
+                (utils/add-hover-style
+                 [:a {:href (nav/get-link :details id)
+                      :style {:textDecoration "none" :display "block"
+                              :color "#888"
+                              :border "1px solid #808080" :borderTop "none" :padding 5
+                              :width 195 :height 16}
+                      :hover-style {:backgroundColor (:dark-bluish style/colors) :color "#fff"}}
+                  name]))
               (:filtered-heroes @state))]]))})
 
 (react/defc HeroDashboard
@@ -50,12 +48,11 @@
               [:a {:href (nav/get-link :details id)
                    :style {:width "25%" :paddingBottom 20 :paddingRight 20
                            :textDecoration "none"}}
-               [Hover
-                {:element-key :div
-                 :props {:style {:borderRadius 2 :padding 20
-                                 :color "#eee" :backgroundColor (:dark-bluish style/colors)}}
-                 :hover-props {:style {:color (:dark-bluish style/colors) :backgroundColor "#eee"}}
-                 :child [:h4 {:style {:textAlign "center"}} name]}]])
+               (utils/add-hover-style
+                [:div {:style {:borderRadius 2 :padding 20
+                               :color "#eee" :backgroundColor (:dark-bluish style/colors)}
+                       :hover-style {:color (:dark-bluish style/colors) :backgroundColor "#eee"}}
+                 [:h4 {:style {:textAlign "center"}} name]])])
             (subvec @hero-service/local-heroes 1 5))]
       [HeroSearch]])
    :component-will-unmount

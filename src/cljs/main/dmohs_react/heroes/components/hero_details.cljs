@@ -2,7 +2,6 @@
   (:require
    [clojure.string :as string]
    [dmohs.react :as react]
-   [dmohs-react.heroes.components.hover :refer [Hover]]
    [dmohs-react.heroes.nav :as nav]
    [dmohs-react.heroes.services.hero-service :as hero-service]
    [dmohs-react.heroes.style :as style]
@@ -17,14 +16,13 @@
    (fn [{:keys [state]}]
      (let [{:keys [id name] :as hero} (:hero @state)
            make-button (fn [button-props label]
-                         [Hover
-                          {:element-key :button
-                           :props (utils/deep-merge
-                                   {:style (assoc (:button style/elements)
-                                             :marginTop 20 :padding "5px 10px")}
-                                   button-props)
-                           :hover-props {:style {:backgroundColor (:light-bluish style/colors)}}
-                           :child label}])]
+                         (utils/add-hover-style
+                          [:button (utils/deep-merge
+                                    {:style (assoc (:button style/elements)
+                                              :marginTop 20 :padding "5px 10px")
+                                     :hover-style {:backgroundColor (:light-bluish style/colors)}}
+                                    button-props)
+                           label]))]
        [:div {}
         [:h2 {:style (:h2-and-h3 style/elements)}
          (string/upper-case name) " Details"]

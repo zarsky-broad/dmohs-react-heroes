@@ -4,7 +4,6 @@
    [dmohs-react.heroes.components.hero-dashboard :as dashboard]
    [dmohs-react.heroes.components.hero-details :as details]
    [dmohs-react.heroes.components.hero-list :as list]
-   [dmohs-react.heroes.components.hover :refer [Hover]]
    [dmohs-react.heroes.nav :as nav]
    [dmohs-react.heroes.services.hero-service :as hero-service]
    [dmohs-react.heroes.utils :as utils]
@@ -23,9 +22,6 @@
      (let [window-hash (aget js/window "location" "hash")]
        (when-not (nav/execute-redirects window-hash)
          (swap! state assoc :window-hash window-hash))))
-   :get-default-props
-   (fn []
-     {:title "Tour of Heroes"})
    :component-will-mount
    (fn [{:keys [this state]}]
      (init-nav-paths)
@@ -36,12 +32,12 @@
      (let [{:keys [window-hash loaded?]} @state
            {:keys [component make-props]} (nav/find-path-handler (str window-hash))
            make-nav-link (fn [props label]
-                           [Hover {:element-key :a
-                                   :props (utils/deep-merge
-                                           {:style (:nav>a style/elements)}
-                                           props)
-                                   :hover-props {:style {:color "#039be5" :backgroundColor (:light-bluish style/colors)}}
-                                   :child label}])]
+                           (utils/add-hover-style
+                            [:a (merge
+                                 {:style (:nav>a style/elements)
+                                  :hover-style {:color "#039be5" :backgroundColor (:light-bluish style/colors)}}
+                                 props)
+                             label]))]
        [:div {}
         [:h1 {:style {:fontSize "1.2em" :color "#999" :marginBottom 0}}
          (:title props)]
@@ -64,6 +60,6 @@
      (.removeEventListener js/window "hashchange" (:hash-change-listener @locals)))})
 
 (defn render-application []
-  (react/render (react/create-element App) (.. js/document (getElementById "app"))))
+  (react/render (react/create-element App {:title "Tour of Heroes"}) (.. js/document (getElementById "app"))))
 
 (render-application)

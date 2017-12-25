@@ -1,6 +1,6 @@
 (ns dmohs-react.heroes.utils
   (:require
-   clojure.string
+   [clojure.string :as string]
    [dmohs.react :as react])
   (:require-macros
    [dmohs-react.heroes.utils :refer [log jslog cljslog pause]]
@@ -10,9 +10,9 @@
 (defn deep-merge [& maps]
   (doseq [x maps] (assert (or (nil? x) (map? x)) (str "not a map: " x)))
   (apply
-    merge-with
-    (fn [x1 x2] (if (and (map? x1) (map? x2)) (deep-merge x1 x2) x2))
-    maps))
+   merge-with
+   (fn [x1 x2] (if (and (map? x1) (map? x2)) (deep-merge x1 x2) x2))
+   maps))
 
 
 (defn ->json-string [x]
@@ -27,7 +27,7 @@
 
 
 (defn ajax [{:keys [url on-done method headers data with-credentials? canned-response] :as arg-map}]
-  (let [method (if-let [method (:method arg-map)] (clojure.string/upper-case (name method)) "GET")
+  (let [method (if-let [method (:method arg-map)] (string/upper-case (name method)) "GET")
         canned-response-params (when-not @use-live-data? (:canned-response arg-map))]
     (assert url (str "Missing url parameter: " arg-map))
     (assert on-done (str "Missing on-done callback: " arg-map))
@@ -51,10 +51,10 @@
       (if canned-response-params
         (do
           (jslog "Mocking AJAX Request:"
-            (merge
-              {:method method :url url}
-              (when headers {:headers headers})
-              (when data {:data data})))
+                 (merge
+                  {:method method :url url}
+                  (when headers {:headers headers})
+                  (when data {:data data})))
           (if-let [delay-ms (:delay-ms canned-response-params)]
             (js/setTimeout call-on-done delay-ms)
             (call-on-done)))
@@ -66,3 +66,21 @@
           (if data
             (.send xhr data)
             (.send xhr)))))))
+
+
+(defn add-hover-style [[_ {:keys [hover-style]} :as element]]
+  (let [hover-id (name (gensym "hover"))
+        cleaned-props (-> (second element)
+                          (assoc :data-hover-id hover-id)
+                          (dissoc :hover-style))
+        css-string (str "[data-hover-id=\"" hover-id "\"]:hover {"
+                        (reduce
+                         (fn [prev [k v]]
+                           (str prev
+                                (string/replace (name k) #"[A-Z]" #(str "-" (string/lower-case %))) ": "
+                                v " !important; "))
+                         "" hover-style)
+                        "}")]
+    (into [(first element) cleaned-props
+           [:style {} css-string]]
+          (subvec element 2))))
