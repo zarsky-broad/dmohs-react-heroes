@@ -68,19 +68,17 @@
             (.send xhr)))))))
 
 
-(defn add-hover-style [[_ {:keys [hover-style]} :as element]]
+(defn add-hover-style [[element-key props :as element]]
   (let [hover-id (name (gensym "hover"))
-        cleaned-props (-> (second element)
-                          (assoc :data-hover-id hover-id)
-                          (dissoc :hover-style))
+        cleaned-props (-> props (assoc :data-hover-id hover-id) (dissoc :hover-style))
         css-string (str "[data-hover-id=\"" hover-id "\"]:hover {"
                         (reduce
                          (fn [prev [k v]]
                            (str prev
                                 (string/replace (name k) #"[A-Z]" #(str "-" (string/lower-case %))) ": "
                                 v " !important; "))
-                         "" hover-style)
+                         "" (:hover-style props))
                         "}")]
-    (into [(first element) cleaned-props
+    (into [element-key cleaned-props
            [:style {} css-string]]
           (subvec element 2))))
