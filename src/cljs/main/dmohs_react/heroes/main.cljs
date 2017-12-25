@@ -34,7 +34,10 @@
            make-nav-link (fn [props label]
                            (utils/add-hover-style
                             [:a (merge
-                                 {:style (:nav>a style/elements)
+                                 {:style {:display "inline-block"
+                                          :padding "5px 10px" :marginTop 10 :marginRight 10
+                                          :backgroundColor "#eee" :borderRadius 4
+                                          :textDecoration "none"}
                                   :hover-style {:color "#039be5" :backgroundColor (:light-bluish style/colors)}}
                                  props)
                              label]))]

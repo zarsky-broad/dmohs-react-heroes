@@ -32,13 +32,13 @@
                          :margin "0.5em 0" :width "3em"}}
          "name:"
          [:input {:style {:height "2em" :fontSize "1em" :paddingLeft "0.4em"}
-                  :defaultValue name
-                  :onChange #(swap! state assoc :new-name (.. % -target -value))}]]
+                  :value name
+                  :onChange #(swap! state assoc-in [:hero :name] (.. % -target -value))}]]
         (make-button {:style {:marginRight "0.5em"}
                       :onClick #(js/history.back)}
                      "go back")
         (make-button {:onClick #(do
-                                  (hero-service/update-hero id (:new-name @state))
+                                  (hero-service/update-hero id name)
                                   (js/history.back))}
                      "save")]))})
 

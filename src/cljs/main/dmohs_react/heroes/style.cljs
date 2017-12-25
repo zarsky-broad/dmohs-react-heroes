@@ -9,10 +9,4 @@
    :button {:color "#888" :backgroundColor "#eee"
             :border "none" :borderRadius 4
             :padding "5px 10px"
-            :cursor "pointer"}
-   :nav>a {:padding "5px 10px"
-           :marginTop 10 :marginRight 10
-           :textDecoration "none"
-           :display "inline-block"
-           :backgroundColor "#eee"
-           :borderRadius 4}})
+            :cursor "pointer"}})
