@@ -17,6 +17,7 @@
   (details/add-nav-paths))
 
 (react/defc App
+  ":title - Title of app."
   {:handle-hash-change
    (fn [{:keys [state]}]
      (let [window-hash (aget js/window "location" "hash")]

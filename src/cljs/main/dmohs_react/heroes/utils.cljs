@@ -68,7 +68,10 @@
             (.send xhr)))))))
 
 
-(defn add-hover-style [[element-key props :as element]]
+(defn add-hover-style
+  "Takes an element with :hover-style in its props and causes
+  those styles to be applied on hover."
+  [[element-key props :as element]]
   (let [hover-id (name (gensym "hover"))
         cleaned-props (-> props (assoc :data-hover-id hover-id) (dissoc :hover-style))
         css-string (str "[data-hover-id=\"" hover-id "\"]:hover {"

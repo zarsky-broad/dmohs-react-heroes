@@ -9,6 +9,7 @@
    ))
 
 (react/defc HeroDetails
+  ":hero-id - ID of hero to display."
   {:component-will-mount
    (fn [{:keys [state props]}]
      (hero-service/get-hero (:hero-id props) #(swap! state assoc :hero %)))

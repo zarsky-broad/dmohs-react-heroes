@@ -19,6 +19,7 @@
 (defonce local-heroes (atom (if @utils/use-live-data? false mock-heroes)))
 
 (defn get-heroes
+  "Loads all heroes, with an optional callback."
   ([]
    (get-heroes (constantly nil)))
   ([on-done]
@@ -28,7 +29,9 @@
                              (on-done (reset! local-heroes (get-parsed-response))))})
      (on-done @local-heroes))))
 
-(defn search-heroes [query on-done]
+(defn search-heroes
+  "Calls on-done with the result of filtering all heroes by query."
+  [query on-done]
   (let [query (string/trim query)]
     (if (string/blank? query)
       (on-done [])
@@ -41,7 +44,9 @@
              (string/lower-case (:name %)))
            result)))))))
 
-(defn add-hero [hero-name]
+(defn add-hero
+  "Creates a new hero with the given name."
+  [hero-name]
   (when-not (string/blank? hero-name)
     (if @utils/use-live-data?
       (utils/ajax {:url nil
@@ -51,7 +56,9 @@
       (swap! local-heroes conj
              {:id (inc (:id (apply max-key :id @local-heroes))) :name hero-name}))))
 
-(defn delete-hero [hero-id]
+(defn delete-hero
+  "Deletes the hero with the given ID."
+  [hero-id]
   (if @utils/use-live-data?
     (utils/ajax {:url (str nil "/" hero-id)
                  :method :delete
@@ -59,14 +66,18 @@
     (swap! local-heroes
            (comp vec (partial remove #(= hero-id (:id %)))))))
 
-(defn get-hero [hero-id on-done]
+(defn get-hero
+  "Calls on-done with the hero with the given ID."
+  [hero-id on-done]
   (if @utils/use-live-data?
     (utils/ajax {:url (str nil "/" hero-id)
                  :on-done (fn [{:keys [get-parsed-response]}]
                             (on-done (get-parsed-response)))})
     (on-done (some #(when (= hero-id (:id %)) %) @local-heroes))))
 
-(defn update-hero [hero-id hero-name]
+(defn update-hero
+  "Updates the hero with the given ID to have the given name."
+  [hero-id hero-name]
   (when-not (string/blank? hero-name)
     (if @utils/use-live-data?
       (utils/ajax {:url (str nil "/" hero-id)
