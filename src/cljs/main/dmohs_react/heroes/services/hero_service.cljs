@@ -19,7 +19,8 @@
 (defonce local-heroes (atom (if @utils/use-live-data? false mock-heroes)))
 
 (defn get-heroes
-  "Loads all heroes, with an optional callback."
+  "Loads all heroes, updates the local store, and optionally passes
+  the result to a callback."
   ([]
    (get-heroes (constantly nil)))
   ([on-done]
