@@ -4,7 +4,7 @@
    [dmohs-react.heroes.components.hero-dashboard :as dashboard]
    [dmohs-react.heroes.components.hero-details :as details]
    [dmohs-react.heroes.components.hero-list :as list]
-   [dmohs-react.heroes.nav :as nav]
+   [org.broadinstitute.uicomps.nav :as nav]
    [dmohs-react.heroes.services.hero-service :as hero-service]
    [dmohs-react.heroes.utils :as utils]
    [dmohs-react.heroes.style :as style]

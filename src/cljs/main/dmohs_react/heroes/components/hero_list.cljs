@@ -1,7 +1,7 @@
 (ns dmohs-react.heroes.components.hero-list
   (:require
    [dmohs.react :as react]
-   [dmohs-react.heroes.nav :as nav]
+   [org.broadinstitute.uicomps.nav :as nav]
    [dmohs-react.heroes.services.hero-service :as hero-service]
    [dmohs-react.heroes.style :as style]
    [dmohs-react.heroes.utils :as utils]

@@ -2,6 +2,7 @@
   :dependencies
   [
    [dmohs/react "1.3.0"]
+   [org.broadinstitute/react-cljs-nav "2017.12.29"]
    [org.clojure/clojure "1.8.0"]
    [org.clojure/clojurescript "1.9.946"]
    ]
