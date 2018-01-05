@@ -3,12 +3,12 @@
   [
    [dmohs/react "1.3.0"]
    [org.broadinstitute/react-cljs-nav "2017.12.29"]
-   [org.clojure/clojure "1.8.0"]
+   [org.clojure/clojure "1.9.0"]
    [org.clojure/clojurescript "1.9.946"]
    ]
   :plugins [[lein-cljsbuild "1.1.7"] [lein-figwheel "0.5.14"]]
   :profiles {:dev
-             {:dependencies [[binaryage/devtools "0.9.7"]]
+             {:dependencies [[binaryage/devtools "0.9.8"]]
               :cljsbuild
               {:builds
                {:client
