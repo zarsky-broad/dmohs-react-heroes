@@ -2,6 +2,8 @@
 
 dmohs/react version of Angular's [Tour of Heroes](https://angular.io/tutorial) tutorial.
 
+**[Live version here!](https://zarsky-broad.github.io/dmohs-react-heroes/)**
+
 ## Dependencies
 
 [Leiningen](https://leiningen.org) and npm.
