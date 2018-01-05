@@ -7,7 +7,7 @@ bower_components/
 # leiningen specific
 .lein-failures
 .lein-repl-history
-target/
+/target/
 
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm

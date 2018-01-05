@@ -38,6 +38,6 @@
   :target-path "resources/public/target"
   :clean-targets ^{:protect false} [:target-path]
   :cljsbuild {:builds {:client {:source-paths ["src/cljs/main"]
-                                :compiler {:main "broadfcui.main"
+                                :compiler {:main "dmohs_react.heroes.main"
                                            :output-dir "resources/public/target/build"
                                            :output-to "resources/public/target/compiled.js"}}}})
