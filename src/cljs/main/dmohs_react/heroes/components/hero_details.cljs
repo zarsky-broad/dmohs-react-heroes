@@ -1,8 +1,8 @@
 (ns dmohs-react.heroes.components.hero-details
   (:require
-   [clojure.string :as string]
    [dmohs.react :as react]
    [org.broadinstitute.uicomps.nav :as nav]
+   [clojure.string :as string]
    [dmohs-react.heroes.services.hero-service :as hero-service]
    [dmohs-react.heroes.style :as style]
    [dmohs-react.heroes.utils :as utils]
@@ -17,7 +17,7 @@
    (fn [{:keys [state]}]
      (let [{:keys [id name] :as hero} (:hero @state)
            make-button (fn [button-props label]
-                         (utils/add-hover-style
+                         (style/add-hover-style
                           [:button (utils/deep-merge
                                     {:style (assoc (:button style/elements)
                                               :marginTop 20 :padding "5px 10px")

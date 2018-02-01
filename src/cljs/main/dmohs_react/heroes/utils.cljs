@@ -66,22 +66,3 @@
           (if data
             (.send xhr data)
             (.send xhr)))))))
-
-
-(defn add-hover-style
-  "Takes an element with :hover-style in its props and causes
-  those styles to be applied on hover."
-  [[element-key props :as element]]
-  (let [hover-id (name (gensym "hover"))
-        cleaned-props (-> props (assoc :data-hover-id hover-id) (dissoc :hover-style))
-        css-string (str "[data-hover-id=\"" hover-id "\"]:hover {"
-                        (reduce
-                         (fn [prev [k v]]
-                           (str prev
-                                (string/replace (name k) #"[A-Z]" #(str "-" (string/lower-case %))) ": "
-                                v " !important; "))
-                         "" (:hover-style props))
-                        "}")]
-    (into [element-key cleaned-props
-           [:style {} css-string]]
-          (subvec element 2))))

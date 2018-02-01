@@ -4,7 +4,6 @@
    [org.broadinstitute.uicomps.nav :as nav]
    [dmohs-react.heroes.services.hero-service :as hero-service]
    [dmohs-react.heroes.style :as style]
-   [dmohs-react.heroes.utils :as utils]
    ))
 
 (react/defc- HeroSearch
@@ -20,7 +19,7 @@
                               #(swap! state assoc :filtered-heroes %)))}]
         [:div {:style {:marginBottom "1em"}}
          (map (fn [{:keys [id name]}]
-                (utils/add-hover-style
+                (style/add-hover-style
                  [:a {:href (nav/get-link :details id)
                       :style {:textDecoration "none" :display "block"
                               :color "#888"
@@ -48,7 +47,7 @@
               [:a {:href (nav/get-link :details id)
                    :style {:width "25%" :paddingBottom 20 :paddingRight 20
                            :textDecoration "none"}}
-               (utils/add-hover-style
+               (style/add-hover-style
                 [:div {:style {:borderRadius 2 :padding 20
                                :color "#eee" :backgroundColor (:dark-bluish style/colors)}
                        :hover-style {:color (:dark-bluish style/colors) :backgroundColor "#eee"}}

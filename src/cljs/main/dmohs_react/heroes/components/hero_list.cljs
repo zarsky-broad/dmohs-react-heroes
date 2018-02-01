@@ -4,7 +4,6 @@
    [org.broadinstitute.uicomps.nav :as nav]
    [dmohs-react.heroes.services.hero-service :as hero-service]
    [dmohs-react.heroes.style :as style]
-   [dmohs-react.heroes.utils :as utils]
    ))
 
 (react/defc- HeroCreator
@@ -34,7 +33,7 @@
       [:h2 {:style (:h2-and-h3 style/elements)} "My Heroes"]
       [HeroCreator]
       (map (fn [{:keys [id name]}]
-             (utils/add-hover-style
+             (style/add-hover-style
               [:a {:style {:display "block"
                            :backgroundColor "#eee" :color "#888"
                            :margin "0.5em" :padding "0.3em 0" :borderRadius 4

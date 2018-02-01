@@ -1,12 +1,11 @@
 (ns dmohs-react.heroes.main
   (:require
    [dmohs.react :as react]
+   [org.broadinstitute.uicomps.nav :as nav]
    [dmohs-react.heroes.components.hero-dashboard :as dashboard]
    [dmohs-react.heroes.components.hero-details :as details]
    [dmohs-react.heroes.components.hero-list :as list]
-   [org.broadinstitute.uicomps.nav :as nav]
    [dmohs-react.heroes.services.hero-service :as hero-service]
-   [dmohs-react.heroes.utils :as utils]
    [dmohs-react.heroes.style :as style]
    ))
 
@@ -33,7 +32,7 @@
      (let [{:keys [window-hash loaded?]} @state
            {:keys [component make-props]} (nav/find-path-handler (str window-hash))
            make-nav-link (fn [props label]
-                           (utils/add-hover-style
+                           (style/add-hover-style
                             [:a (merge
                                  {:style {:display "inline-block"
                                           :padding "5px 10px" :marginTop 10 :marginRight 10
