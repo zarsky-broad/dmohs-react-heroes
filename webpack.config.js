@@ -4,12 +4,12 @@ const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const DefinePlugin = new webpack.DefinePlugin({
+const definePlugin = new webpack.DefinePlugin({
     'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV) // to make sure it's parseable
     }
 });
-const plugins = [DefinePlugin, new CopyWebpackPlugin(['src/static'])];
+const plugins = [definePlugin, new CopyWebpackPlugin(['src/static'])];
 
 if (process.env.NODE_ENV === 'production') {
     plugins.push(new UglifyJSPlugin());

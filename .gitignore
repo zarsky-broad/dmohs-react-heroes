@@ -8,6 +8,7 @@ bower_components/
 .lein-failures
 .lein-repl-history
 /target/
+/resources/
 
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
@@ -42,6 +43,3 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-
-resources
-build

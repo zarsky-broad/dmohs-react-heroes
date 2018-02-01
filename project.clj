@@ -8,7 +8,7 @@
    ]
   :plugins [[lein-cljsbuild "1.1.7"] [lein-figwheel "0.5.14"]]
   :profiles {:dev
-             {:dependencies [[binaryage/devtools "0.9.8"]]
+             {:dependencies [[binaryage/devtools "0.9.9"]]
               :cljsbuild
               {:builds
                {:client
@@ -16,8 +16,8 @@
                  :figwheel true
                  :compiler
                  {:main "dmohs_react.heroes.main"
+                  :output-dir "resources/public/build"
                   :optimizations :none
-                  :asset-path "target/build"
                   :pretty-print true
                   :anon-fn-naming-policy :mapped
                   :preloads [devtools.preload]
@@ -33,11 +33,11 @@
                   :fn-invoke-direct true
                   :elide-asserts true
                   :language-out :ecmascript5
-                  :optimize-constants true
-                  :output-dir "build"}}}}}}
+                  :optimize-constants true}}}}}}
   :target-path "resources/public/target"
   :clean-targets ^{:protect false} [:target-path]
   :cljsbuild {:builds {:client {:source-paths ["src/cljs/main"]
                                 :compiler {:main "dmohs_react.heroes.main"
-                                           :output-dir "resources/public/target/build"
-                                           :output-to "resources/public/target/compiled.js"}}}})
+                                           :output-dir "target/build"
+                                           :output-to "target/main.js"
+                                           :asset-path "build"}}}})

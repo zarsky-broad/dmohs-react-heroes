@@ -4,17 +4,18 @@
   "description": "",
   "main": "webpack.config.js",
   "dependencies": {
-    "create-react-class": "^15.6.2",
+    "create-react-class": "^15.6.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.3.1",
-    "uglifyjs-webpack-plugin": "^1.1.6",
+    "uglifyjs-webpack-plugin": "^1.1.8",
     "webpack": "^3.10.0"
   },
   "scripts": {
-    "webpack": "webpack"
+    "webpack": "webpack",
+    "webpack-watcher": "webpack --watch"
   },
   "repository": {
     "type": "git",
