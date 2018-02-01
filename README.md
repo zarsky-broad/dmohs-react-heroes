@@ -22,3 +22,12 @@ $ npm run webpack-watcher
 ```
 
 Then open a browser (Chrome is best if you want to poke around in the console) to http://localhost:3449.
+
+## Building
+
+```sh
+$ lein with-profile deploy cljsbuild once
+$ NODE_ENV=production npm run webpack
+```
+
+The built files will be in `resources/public/`
